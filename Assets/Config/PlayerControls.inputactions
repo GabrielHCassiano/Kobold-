@@ -1,0 +1,390 @@
+{
+    "name": "PlayerControls",
+    "maps": [
+        {
+            "name": "Game",
+            "id": "aaaf0965-efae-4938-b660-5052ee7d8131",
+            "actions": [
+                {
+                    "name": "Direction",
+                    "type": "Value",
+                    "id": "0089ed2e-8cda-4b45-bcbb-c7f23bd85d88",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "AutoAttack",
+                    "type": "Button",
+                    "id": "faff143b-d706-4fca-b87b-258ea8d79f50",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "7714a9a9-84cb-4dab-b5be-646e3fe022a2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MouseDirection",
+                    "type": "Button",
+                    "id": "f4558465-f5aa-4094-993f-cfa82176ad07",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MouseSelect",
+                    "type": "Button",
+                    "id": "a12934b9-3aec-4fe2-b6ee-d251922b2f99",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d1b5a2e2-7ed1-49b0-8b4b-f34f1638791e",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard",
+                    "action": "AutoAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "867d60c5-5141-4c03-a417-75bb79aff37b",
+                    "path": "<HID::Microntek              USB Joystick          >/button2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "joystick",
+                    "action": "AutoAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a5de4ccb-06d2-40cb-819b-fc02283edbfa",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cb2aab34-37e0-4b02-9a56-4c5b9b411dcc",
+                    "path": "<HID::Microntek              USB Joystick          >/button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "joystick",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "a095f9ff-7946-405f-a1cf-a446019007f4",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Direction",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "35e30e88-3d35-4b36-b85b-6d04f9ca886a",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "151e9d0c-8523-4d15-bd67-e0b693a90eca",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "cb3586c1-a4d8-46fc-afc3-840e552dbf42",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "fee5452e-aba2-47cb-9fc2-937438910004",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "61372d58-0d33-4c11-85c9-a053c20ebd00",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Direction",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "84e0a7f8-9bd1-4db4-8500-4702ea6ebf60",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "55613908-cfbc-441f-b00b-9b1dc7ca551f",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "8ba2c5ac-997a-4a78-a986-de6f23dee272",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "50ef37f5-f750-4ce0-983e-566f4b93a0b2",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "afa9be62-a0f0-4324-8d5e-57f500e91a5d",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Direction",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "e6585e37-e29d-4002-8f9d-7252776240ab",
+                    "path": "<HID::Microntek              USB Joystick          >/hat/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "joystick",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "7c86826a-738e-4523-bfbf-76574486b55a",
+                    "path": "<HID::Microntek              USB Joystick          >/hat/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "joystick",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "0488cba1-c543-429d-8e12-b90abfb8fa82",
+                    "path": "<HID::Microntek              USB Joystick          >/hat/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "joystick",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "714c1a84-4667-4a29-a206-28034a055f55",
+                    "path": "<HID::Microntek              USB Joystick          >/hat/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "joystick",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "776331d7-4a54-4c2c-933c-031897921abc",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Direction",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "99400b7a-d27a-404c-aed6-27764c48f58c",
+                    "path": "<HID::Microntek              USB Joystick          >/stick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "joystick",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "4ac0ce06-4724-41ad-83cc-6d4ae3ad7f9a",
+                    "path": "<HID::Microntek              USB Joystick          >/stick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "joystick",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "9cf6491f-cb40-470a-86a7-96eefb514a37",
+                    "path": "<HID::Microntek              USB Joystick          >/stick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "joystick",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "4ad10e79-af6e-4d59-8579-75c4e39a15d6",
+                    "path": "<HID::Microntek              USB Joystick          >/stick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "joystick",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "925230b1-4c51-4dcc-b41a-715e15de5b4e",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard",
+                    "action": "MouseDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34ec8c43-ecf2-48ff-991a-7f9bbb36970b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "joystick",
+                    "action": "MouseDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "59a8c84b-330c-41f2-91da-7c717ad9c47a",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard",
+                    "action": "MouseSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "56f0723c-8b4f-4fd7-a76e-a7d19e204785",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "joystick",
+                    "action": "MouseSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "keyboard",
+            "bindingGroup": "keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "joystick",
+            "bindingGroup": "joystick",
+            "devices": [
+                {
+                    "devicePath": "<HID::Microntek              USB Joystick          >",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
