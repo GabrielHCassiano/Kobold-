@@ -34,12 +34,12 @@
                 },
                 {
                     "name": "MouseDirection",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "f4558465-f5aa-4094-993f-cfa82176ad07",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "MouseSelect",
@@ -319,7 +319,7 @@
                 {
                     "name": "",
                     "id": "925230b1-4c51-4dcc-b41a-715e15de5b4e",
-                    "path": "",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "keyboard",
@@ -370,6 +370,11 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
                     "isOptional": false,
                     "isOR": false
                 }
