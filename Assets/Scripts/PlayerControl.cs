@@ -58,7 +58,7 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //MoveLogic();
+        MoveLogic();
     }
 
     private void LateUpdate()
