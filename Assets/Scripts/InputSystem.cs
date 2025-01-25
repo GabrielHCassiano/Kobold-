@@ -37,12 +37,12 @@ public class InputSystem : MonoBehaviour
 
     public void OnMouseDirection(InputAction.CallbackContext context)
     {
-        inputDirection = context.ReadValue<Vector2>();
+        inputMouseDirection = context.ReadValue<Vector2>();
     }
 
     public void OnMouseSelect(InputAction.CallbackContext context)
     {
-        inputAutoAttack = context.action.triggered;
+        inputMouseSelect = context.action.triggered;
     }
 
     public Vector2 InputDirection
