@@ -33,6 +33,11 @@ public class PlayerControl : MonoBehaviour
         DashLogic();
         AnimatorLogic();
         AutoAttackLogic();
+
+        if (currentIndex == 3)
+        {
+            Combine();
+        }
     }
 
     private void FixedUpdate()
@@ -93,7 +98,7 @@ public class PlayerControl : MonoBehaviour
 
     private void CollectBubble(Bubble.BubbleType bubbleType)
     {
-        Debug.Log(currentIndex);
+       
         if(currentIndex < inventory.Length)
         {
             inventory[currentIndex] = bubbleType; 
@@ -101,7 +106,7 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            Combine();
+            
             inventory[0] = bubbleType;
             currentIndex = 1;
         }
@@ -210,7 +215,8 @@ public class PlayerControl : MonoBehaviour
                 Water();
             }
             else if (elementCount.GetValueOrDefault(Bubble.BubbleType.Fire) == 1 &&
-                    elementCount.GetValueOrDefault(Bubble.BubbleType.Air) == 2)
+                    elementCount.GetValueOrDefault(Bubble.BubbleType.Air) == 2 || elementCount.GetValueOrDefault(Bubble.BubbleType.Fire) == 2 &&
+                    elementCount.GetValueOrDefault(Bubble.BubbleType.Air) == 1 )
             {
                 Electric();
             }
