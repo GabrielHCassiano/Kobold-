@@ -5,9 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemies
+<<<<<<< HEAD
   - Bubble
   - Enemy
   - Bullet
+=======
+  - Enemy
+  - Bullet
+  - Bubble
+>>>>>>> main
   layers:
   - Default
   - TransparentFX
