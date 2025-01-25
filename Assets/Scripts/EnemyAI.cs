@@ -27,7 +27,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("PlayerObj").transform;
+        player = GameObject.Find("Player").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 
@@ -81,8 +81,8 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        playerInSightRange = Physics.ChechSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.ChechSphere(transform.position, attackRange, whatIsPlayer);
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         if (!playerInSightRange && !playerInAttackRange) Patrol();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
@@ -93,12 +93,12 @@ public class EnemyAI : MonoBehaviour
     {
         health -= damage;
 
-        if(health <= 0) invoke(nameof(DestroyEnemy), .5f);
+        if(health <= 0) Invoke(nameof(DestroyEnemy), .5f);
         
     }
 
     private void DestroyEnemy()
     {
-        Destroy(GameObject);
+        Destroy(gameObject);
     }
 }

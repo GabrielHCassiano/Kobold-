@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+
+    public Bubble.BubbleType[] inventory = new Bubble.BubbleType[3];
+    private int currentIndex = 0;
+
+
     private Rigidbody rb;
     private Animator animator;
     private InputSystem inputSystem;
@@ -71,4 +76,46 @@ public class PlayerControl : MonoBehaviour
         }
        
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Bubble"))
+        {
+            Bubble bubble = other.GetComponent<Bubble>();
+            if(bubble != null)
+            {
+                CollectBubble(bubble.bubbleType);
+
+            }
+        }
+    }
+
+    private void CollectBubble(Bubble.BubbleType bubbleType)
+    {
+        Debug.Log(currentIndex);
+        if(currentIndex < inventory.Length)
+        {
+            inventory[currentIndex] = bubbleType; 
+            currentIndex++;
+        }
+        else
+        {
+            inventory[0] = bubbleType;
+            currentIndex = 1;
+        }
+        DebugInventoryLog();
+       
+
+    }
+
+    private void DebugInventoryLog()
+    {
+        string inventoryContent = "";
+        for (int i = 0; i < inventory.Length; i++)
+        {
+            inventoryContent += inventory[i].ToString() + " | ";
+        }
+        Debug.Log(inventoryContent);
+    }
+
 }
