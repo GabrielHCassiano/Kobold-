@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Windows;
 
 public class EnemyAI : MonoBehaviour
 {
     private GameObject player;
     private NavMeshAgent agent;
 
+    [SerializeField] private Animator animatorMain;
+    [SerializeField] private Animator animatorEffects;
+    [SerializeField] private Animator animatorCopy;
+
     //public LayerMask whatIsGround, whatIsPlayer;
 
-    private float health = 5;
+    private float health = 50;
 
     private bool canMove = true;
+
+    private bool inHurt = false;
 
     //public float attackInterval;
     //bool hasAttacked;
@@ -26,7 +33,7 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
 
-        agent.updateRotation = false;
+        //agent.updateRotation = false;
         agent.updateUpAxis = false;
     }
 
@@ -34,6 +41,7 @@ public class EnemyAI : MonoBehaviour
     private void Update()
     {
         DeathLogic();
+        AnimationsLogic();
     }
 
     public void FixedUpdate()
@@ -59,11 +67,28 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    public void AnimationsLogic()
+    {
+        animatorMain.SetFloat("Horizontal", agent.velocity.x);
+        animatorMain.SetFloat("Vertical", agent.velocity.y);
+
+        animatorEffects.SetBool("InHurt", inHurt);
+
+        animatorCopy.SetFloat("Horizontal", agent.velocity.x);
+        animatorCopy.SetFloat("Vertical", agent.velocity.y);
+    }
+
+    public void ResetInHurt()
+    {
+        inHurt = false;
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Bullet"))
         {
-            health -= 1;
+            inHurt = true;
+            health -= 15;
             other.gameObject.SetActive(false);
         }
     }

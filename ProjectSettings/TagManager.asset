@@ -11,6 +11,8 @@ TagManager:
   - Enemy
   - Bullet
   - Bubble
+  - Bubbles
+  - EnemyHit
   layers:
   - Default
   - TransparentFX

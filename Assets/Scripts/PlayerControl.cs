@@ -2,19 +2,19 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.HID;
 
 public class PlayerControl : MonoBehaviour
 {
-
     public Bubble.BubbleType[] inventory = new Bubble.BubbleType[3];
     private int currentIndex = 0;
 
-
     private Rigidbody rb;
-    private Animator animator;
+    [SerializeField] private Animator animatorMain;
+    [SerializeField] private Animator animatorEffects;
+    [SerializeField] private Animator animatorCopy;
+
     private InputSystem inputSystem;
+    private Knockback knockback;
 
     private GameObject enemies;
 
@@ -26,29 +26,43 @@ public class PlayerControl : MonoBehaviour
     private int idBullet = 0;
 
     private RaycastHit hit;
-    
-    [SerializeField] private float speed;
 
-    private Vector2 mouseRotation;
+    [Header("Status")]
+
+    private int lifeMax = 200;
+    [SerializeField] private int lifeCurrent;
+
+    private int manaMax = 100;
+    [SerializeField] private int manaCurrent;
+
+    [SerializeField] private float speed;
 
     private bool canMove = true;
     private bool canAttack = true;
+
+    private bool inHurt = false;
+
+    private Vector3 lookPos;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
         inputSystem = GetComponentInChildren<InputSystem>();
+        knockback = GetComponent<Knockback>();
         enemies = GameObject.FindWithTag("Enemies");
+
+        lifeCurrent = lifeMax;
+        manaCurrent = manaMax;
     }
 
     // Update is called once per frame
     void Update()
     {
-        DashLogic();
+        MoveChar();
         AnimatorLogic();
-        //AutoAttackLogic();
+        AutoAttackLogic();
+        Death();
 
         if (currentIndex == 3)
         {
@@ -58,42 +72,57 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //MoveLogic();
-    }
-
-    private void LateUpdate()
-    {
-        MoveChar();
+        MoveLogic();
     }
 
     public void MoveLogic()
     {
-        if (canMove)
+        if (knockback.KnockbackCountLogic < 0)
         {
-            rb.velocity = new Vector3(inputSystem.InputDirection.x * speed, 0, inputSystem.InputDirection.y * speed);
+            if (canMove)
+            {
+                rb.velocity = new Vector3(inputSystem.InputDirection.x * speed, 0, inputSystem.InputDirection.y * speed);
+            }
         }
+        else
+        {
+            knockback.KnockLogic();
+        }
+
     }
 
     public void MoveChar()
     {
-        print(inputSystem.InputMouseDirection);
-        if (inputSystem.InputMouseDirection != Vector2.zero)
+        Ray ray = Camera.main.ScreenPointToRay(inputSystem.InputMouseDirection);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100))
         {
-            mouseRotation.x += inputSystem.InputMouseDirection.x;
-            mouseRotation.y += inputSystem.InputMouseDirection.y;
-
-            model.transform.rotation = Quaternion.Euler(mouseRotation.y, mouseRotation.x, 0);
+            lookPos = hit.point;
         }
-    }
 
-    public void DashLogic()
-    {
+        Vector3 lookDir = lookPos - transform.position;
+        lookDir.y = 0;
+
+        transform.LookAt(transform.position + lookDir, Vector3.up);
 
     }
 
     public void AnimatorLogic()
     {
+        animatorMain.SetFloat("Horizontal", rb.velocity.x);
+        animatorMain.SetFloat("Vertical", rb.velocity.y);
 
+        animatorEffects.SetBool("InHurt", inHurt);
+
+        animatorCopy.SetFloat("Horizontal", rb.velocity.x);
+        animatorCopy.SetFloat("Vertical", rb.velocity.y);
+    }
+
+    public void ResetInHurt()
+    {
+        inHurt = false;
     }
 
     public void AutoAttackLogic()
@@ -106,19 +135,18 @@ public class PlayerControl : MonoBehaviour
             float enemyDistance = Vector3.Distance(enemy.position, transform.position);
             Vector3 distance = enemy.position - transform.position;
 
-            print("Dis" + distance);
 
             float angle = Vector3.Angle(distance, transform.forward);
 
             Ray ray = new Ray(transform.position, distance);
-            bool rayHit = Physics.Raycast(ray, out hit, minDistance);
+            bool rayHit = Physics.Raycast(ray, out hit, 5);
 
-            if (angle < 45 / 2 && rayHit == true & hit.collider != null)
+            if (angle < 45 / 2 && rayHit == true && enemyDistance < minDistance && enemy.gameObject.activeSelf && hit.collider != null)
             {
-             //if (enemyDistance < minDistance && enemy.gameObject.activeSelf)
-            //{
+                print(enemy.position);
                 minDistance = enemyDistance;
                 target = enemy;
+                Debug.DrawRay(transform.position, distance, Color.red);
             }
         }
         if (target)
@@ -129,9 +157,17 @@ public class PlayerControl : MonoBehaviour
                 print("Attack");
                 StartCoroutine(AttackCooldown(target));
             }
-            Debug.DrawLine(transform.position, target.position, Color.green);
+            //Debug.DrawLine(transform.position, target.position, Color.green);
         }
 
+    }
+
+    public void Death()
+    {
+        if (lifeCurrent <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -144,6 +180,13 @@ public class PlayerControl : MonoBehaviour
                 CollectBubble(bubble.bubbleType);
 
             }
+        }
+
+        if (other.CompareTag("EnemyHit"))
+        {
+            inHurt = true;
+            lifeCurrent -= 10;
+            knockback.Knocking(other);
         }
     }
 
@@ -345,8 +388,8 @@ public class PlayerControl : MonoBehaviour
         //bullet[idBullet].transform.parent = null;
         //bullet[idBullet].SetActive(true);
         bulletCurrent = Instantiate(bullet, spawnBullet.transform.position, Quaternion.identity);
-        bulletCurrent.GetComponent<Bullet>().Target = target;
-        yield return new WaitForSeconds(1f);
+        bulletCurrent.GetComponent<Bullet>().Target = spawnBullet.transform;
+        yield return new WaitForSeconds(1.5f);
         canAttack = true;
     }
 }
