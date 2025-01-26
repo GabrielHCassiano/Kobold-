@@ -9,8 +9,11 @@ public class SpawnLogic : MonoBehaviour
     
     void Start()
     {
-        Vector3 position =  new Vector3(Random.Range(-10,10),1.5f,Random.Range(-10,10));
-        Instantiate(enemyPrefab, position, Quaternion.identity, transform);
+        for (int i = 0; i < 2; i++)
+        {
+            Vector3 position = new Vector3(Random.Range(-10, 10), 1.5f, Random.Range(-10, 10));
+            Instantiate(enemyPrefab, position, Quaternion.identity, transform);
+        }
     }
 
     // Update is called once per frame

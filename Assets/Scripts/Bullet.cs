@@ -5,12 +5,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private Transform target;
-    [SerializeField] private Vector3 targetPos;
+    private Vector3 direct;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        direct = target.forward;
     }
 
     // Update is called once per frame
@@ -22,9 +22,7 @@ public class Bullet : MonoBehaviour
 
     public void StartAttack()
     {
-        print(targetPos);
-        targetPos = new Vector3(target.position.x, 0, target.position.z);
-        transform.Translate(targetPos.normalized * 1 * Time.deltaTime);
+        transform.Translate(direct * 5 * Time.deltaTime);
     }
 
     public Transform Target
